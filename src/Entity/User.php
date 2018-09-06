@@ -83,6 +83,9 @@ class User
         $this->capPatches = new ArrayCollection();
         $this->orderings = new ArrayCollection();
         $this->userAddresses = new ArrayCollection();
+        $this->activation_code = md5(uniqid('code_', false));
+        $this->date_register = new \DateTime('now');
+        $this->roles = array("ROLE_USER");
     }
 
     public function getId(): ?int
