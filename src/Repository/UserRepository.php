@@ -19,6 +19,38 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * @param $username
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username = :username OR u.email = :email')
+            ->andWhere('u.active = 1')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $activation_code
+     * @return User
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getUserByActivationCode(string $activation_code)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.active = :active')
+            ->andWhere('u.activation_code = :activation_code')
+            ->setParameter('active', false)
+            ->setParameter('activation_code', $activation_code)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
