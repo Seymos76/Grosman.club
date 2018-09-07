@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Service\Email\EmailManager;
 use App\Service\Security\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,16 +34,17 @@ class SecurityController extends AbstractController
     /**
      * @Route(path="/register", name="register")
      * @param Request $request
-     * @param UserManager $manager
+     * @param UserManager $userManager
      * @return Response
      */
-    public function register(Request $request, UserManager $manager)
+    public function register(Request $request, UserManager $userManager, EmailManager $emailManager)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->register($user);
+            $userManager->register($user);
+            $emailManager->sendCodeForAccountActivation($user);
             $this->addFlash('success', "Votre compte a été créé avec succès.");
             return $this->redirectToRoute('account');
         }
