@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Self_;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CapColorRepository")
@@ -82,9 +83,9 @@ class CapColor
         return $this->rgba;
     }
 
-    public function setRgba(string $rgba): self
+    public function setRgba(string $rgba = null): self
     {
-        $this->rgba = $rgba;
+        $this->rgba = "rgba(".self::random_color_part().", ".self::random_color_part().", ".self::random_color_part().", 1)";;
 
         return $this;
     }
@@ -94,9 +95,9 @@ class CapColor
         return $this->hexa;
     }
 
-    public function setHexa(string $hexa): self
+    public function setHexa(string $hexa = null): self
     {
-        $this->hexa = $hexa;
+        $this->hexa = self::random_color();
 
         return $this;
     }
@@ -117,6 +118,22 @@ class CapColor
         }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function random_color_part() {
+        $color = str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+        return $color;
+    }
+
+    /**
+     * @return string
+     */
+    public function random_color() {
+        $color = $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
+        return $color;
     }
 
     public function removeCap(Cap $cap): self

@@ -30,7 +30,7 @@ class CapPatch
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="capPatches")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
