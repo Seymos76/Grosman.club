@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -59,7 +60,7 @@ class User
     private $token;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $activation_code;
 
@@ -86,11 +87,20 @@ class User
         $this->activation_code = md5(uniqid('code_', false));
         $this->date_register = new \DateTime('now');
         $this->roles = array("ROLE_USER");
+        $this->active = false;
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getUsername(): ?string
@@ -289,5 +299,41 @@ class User
         }
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }

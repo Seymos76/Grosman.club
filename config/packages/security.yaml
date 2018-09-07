@@ -1,5 +1,4 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\User:
             algorithm: bcrypt
@@ -8,7 +7,7 @@ security:
         grosman:
             entity:
                 class: App\Entity\User
-        in_memory: { memory: ~ }
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -29,5 +28,6 @@ security:
         ROLE_ADMIN: ROLE_USER
         ROLE_GOD: ROLE_ADMIN
     access_control:
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/account, roles: ROLE_USER }

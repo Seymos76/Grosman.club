@@ -18,17 +18,15 @@ class UserManager
 {
     private $manager;
     private $passwordManager;
-    private $userLoader;
 
-    public function __construct(EntityManager $manager, PasswordManager $passwordManager, UserLoaderInterface $userLoader)
+    public function __construct(EntityManager $manager, PasswordManager $passwordManager)
     {
         $this->manager = $manager;
         $this->passwordManager = $passwordManager;
-        $this->userLoader = $userLoader;
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      */
     public function register(User $user)
     {
@@ -37,8 +35,16 @@ class UserManager
         $this->manager->update($user);
     }
 
-    public function getUser()
+    public function activateUser(string $code)
     {
-        $user = $this->userLoader->loadUserByUsername();
+        $user = $this->manager->getManager()->getRepository(User::class)->getUserByActivationCode($code);
+        if (!$user) {
+            return false;
+        } else {
+            $user->setActive(true);
+            $user->setActivationCode(null);
+            $this->manager->update($user);
+            return true;
+        }
     }
 }

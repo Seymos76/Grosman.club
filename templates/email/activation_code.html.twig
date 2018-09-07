@@ -1,0 +1,9 @@
+{% extends "base_email.html.twig" %}
+
+{% block body %}
+    <h1>Activation de votre compte client</h1>
+    <p>
+        Cliquez sur le lien ci-dessous pour activer votre compte.
+    </p>
+    <a href="{{ absolute_url(path('activate_account', {'activation_code': activation_code})) }}">Activer mon compte</a>
+{% endblock %}

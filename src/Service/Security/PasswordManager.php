@@ -8,6 +8,7 @@
 
 namespace App\Service\Security;
 
+use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -21,11 +22,11 @@ class PasswordManager
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      * @param string $password
      * @return string
      */
-    public function encodePassword(UserInterface $user, string $password)
+    public function encodePassword(User $user, string $password)
     {
         $encoded = $this->passwordEncoder->encodePassword($user, $password);
         return $encoded;
