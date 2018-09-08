@@ -2,110 +2,139 @@
 {% block title %}Configurateur{% endblock %}
 {% block configurator_css %}
     <!-- BASE CSS -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendors.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icon_fonts/css/all_icons.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('node_modules/@glidejs/glide/dist/css/glide.core.css') }}">
-    <link rel="stylesheet" href="{{ asset('node_modules/@glidejs/glide/dist/css/glide.theme.css') }}">
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <script src="{{ asset('js/modernizr.js') }}"></script>
     <!-- Modernizr -->
 {% endblock %}
-
 {% block body %}
-    <section class="container">
-        <div id="wizard_container">
-            <form name="example-1" id="wrapped" method="POST">
-                <input id="website" name="website" type="text" value="">
-                <!-- Leave for security protection, read docs for details -->
-                <div id="middle-wizard">
+    <main>
+        <div class="container">
+            <div id="wizard_container">
+                <form name="example-1" id="wrapped" method="POST">
+                    <input id="website" name="website" type="text" value="">
+                    <!-- Leave for security protection, read docs for details -->
+                    <div id="middle-wizard">
 
-                    <div class="step">
-                        <div class="question_title">
-                            <h3>Please select a product</h3>
-                            <p>Single Selection (Radio based)</p>
-                        </div>
-                        {% include "ecommerce/carousel/types.html.twig" %}
-                    </div>
-                    <!-- /step -->
-
-                    <div class="step">
-                        <div class="question_title">
-                            <h3>Which Processor is right for you?</h3>
-                            <p>Single Selection (Radio based)</p>
-                        </div>
-                        {% include "ecommerce/carousel/colors.html.twig" %}
-                    </div>
-                    <!-- /step -->
-
-                    <div class="step">
-                        <div class="question_title">
-                            <h3>How much Memory is right for you?</h3>
-                            <p>Single Selection (Radio based)</p>
-                            {{ dump(patches) }}
-                        </div>
-                        {% include "ecommerce/carousel/patches.html.twig" %}
-                    </div>
-                    <!-- /step -->
-
-                    <!-- Last step ============================== -->
-                    <div class="submit step">
-                        <div class="question_title">
-                            <h3>Plase fill with your details</h3>
-                            <p>Ei duo homero postea dignissim.</p>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <div class="box_general">
-                                    <div class="form-group">
-                                        <input type="text" name="first_last_name" class="required form-control" placeholder="First and Last name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" class="required form-control" placeholder="Your Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="telephone" class="form-control" placeholder="Your Telephone">
-                                    </div>
-                                    <div class="form-group add_bottom_30">
-                                        <div class="styled-select">
-                                            <select class="required" name="country">
-                                                <option value="" selected>Select your country</option>
-                                                <option value="Europe">Europe</option>
-                                                <option value="Asia">Asia</option>
-                                                <option value="North America">North America</option>
-                                                <option value="South America">South America</option>
-                                            </select>
+                        <div class="step">
+                            <div class="question_title">
+                                <h3>Please select a product</h3>
+                                <p>Single Selection (Radio based)</p>
+                            </div>
+                            <div class="row justify-content-center">
+                                {% for type in types %}
+                                    <div class="col-lg-4">
+                                        <div class="item">
+                                            <input data-price="1499.00" data-label="MacBook Pro Air" id="answer_{{ type.id }}_group_1" type="radio" name="answer_group_1" value="MacBook Pro Air $1499.00" class="required">
+                                            <label for="answer_{{ type.id }}_group_1"><img src="{{ type.image }}" alt="" class="img-fluid"><i class="ribbon"><span>Popular</span></i><span class="item_price">$1499.00</span><strong>MacBook Pro Air</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
                                         </div>
                                     </div>
-                                    <div class="checkbox_questions">
-                                        <input name="terms" type="checkbox" class="icheck required" value="yes">
-                                        <label>Please accept <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
-                                    </div>
-                                </div>
-                                <!-- /box_general -->
+                                {% endfor %}
                             </div>
+                            <!-- /row-->
                         </div>
-                        <!-- /row -->
+                        <!-- /step -->
+
+                        <div class="step">
+                            <div class="question_title">
+                                <h3>Which Processor is right for you?</h3>
+                                <p>Single Selection (Radio based)</p>
+                            </div>
+                            <div class="row justify-content-center">
+                                {% for color in colors %}
+                                    <div class="col-lg-4">
+                                        <div class="item">
+                                            <input data-price="199.00" data-label="3.2GHz 8-core Intel Xeon" id="answer_{{ color.id }}_group_2" type="radio" name="answer_group_2" value="3.2GHz 8-core Intel Xeon $199.00" class="required">
+                                            <label for="answer_{{ color.id }}_group_2"><div class="color_item" style="background-color: {{ color.hexa }}"></div><span class="item_price">$199.00</span><strong>3.2GHz 8-core Intel Xeon</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- /row-->
+                        </div>
+                        <!-- /step -->
+
+                        <div class="step">
+                            <div class="question_title">
+                                <h3>How much Memory is right for you?</h3>
+                                <p>Single Selection (Radio based)</p>
+                            </div>
+                            <div class="row justify-content-center">
+                                {% for patch in patches %}
+                                    <div class="col-lg-4">
+                                        <div class="item">
+                                            <input data-price="99.00" data-label="32GB 2666MHz" id="answer_{{ patch.id }}_group_3" type="radio" name="answer_group_3" value="332GB 2666MHz $99.00" class="required">
+                                            <label for="answer_{{ patch.id }}_group_3"><img src="{{ patch.image }}" alt="" class="img-fluid"><span class="item_price">$99.00</span><strong>32GB 2666MHz</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- /row-->
+                        </div>
+                        <!-- /step -->
+
+                        <!-- Last step ============================== -->
+                        <div class="submit step">
+                            <div class="question_title">
+                                <h3>Plase fill with your details</h3>
+                                <p>Ei duo homero postea dignissim.</p>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5">
+                                    <div class="box_general">
+                                        <div class="form-group">
+                                            <input type="text" name="first_last_name" class="required form-control" placeholder="First and Last name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="required form-control" placeholder="Your Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="telephone" class="form-control" placeholder="Your Telephone">
+                                        </div>
+                                        <div class="form-group add_bottom_30">
+                                            <div class="styled-select">
+                                                <select class="required" name="country">
+                                                    <option value="" selected>Select your country</option>
+                                                    <option value="Europe">Europe</option>
+                                                    <option value="Asia">Asia</option>
+                                                    <option value="North America">North America</option>
+                                                    <option value="South America">South America</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox_questions">
+                                            <input name="terms" type="checkbox" class="icheck required" value="yes">
+                                            <label>Please accept <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
+                                        </div>
+                                    </div>
+                                    <!-- /box_general -->
+                                </div>
+                            </div>
+                            <!-- /row -->
+                        </div>
+                        <!-- /Last step ============================== -->
                     </div>
-                    <!-- /Last step ============================== -->
-                </div>
-                <!-- /middle-wizard -->
-                <div id="bottom-wizard">
-                    <div class="float-right clearfix">
-                        <button type="button" name="backward" class="backward">Backward </button>
-                        <button type="button" name="forward" class="forward">Forward</button>
-                        <button type="submit" name="process" class="submit">Submit</button>
+                    <!-- /middle-wizard -->
+                    <div id="bottom-wizard">
+                        <div class="float-right clearfix">
+                            <button type="button" name="backward" class="backward">Précédent </button>
+                            <button type="button" name="forward" class="forward">Suivant</button>
+                            <button type="submit" name="process" class="submit">Valider</button>
+                        </div>
                     </div>
-                </div>
-                <!-- /bottom-wizard -->
-                <input type="hidden" id="hidden_total" name="hidden_total">
-                <!-- /Hidden total input -->
-            </form>
+                    <!-- /bottom-wizard -->
+                    <input type="hidden" id="hidden_total" name="hidden_total">
+                    <!-- /Hidden total input -->
+                </form>
+            </div>
+            <!-- /Wizard container -->
         </div>
-        <!-- /Wizard container -->
-    </section>
+        <!-- /Container -->
+    </main>
+    <!-- /main -->
 {% endblock %}
 {% block configurator_js %}
     <!-- COMMON SCRIPTS -->
@@ -113,22 +142,4 @@
     <script src="{{ asset('js/common_scripts.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/wizard_func_1.js') }}"></script>
-    <script src="{{ asset('node_modules/@glidejs/glide/dist/glide.js') }}"></script>
-    <script>
-        new Glide('.glide_type', {
-            type: 'carousel',
-            perView: 3,
-            gap: 50
-        }).mount()
-        new Glide('.glide_color', {
-            type: 'carousel',
-            perView: 3,
-            gap: 50
-        }).mount()
-        new Glide('.glide_patch', {
-            type: 'carousel',
-            perView: 3,
-            gap: 50
-        }).mount()
-    </script>
 {% endblock %}
