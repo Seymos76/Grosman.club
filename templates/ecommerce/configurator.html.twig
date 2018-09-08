@@ -86,27 +86,35 @@
                                 <div class="col-lg-5">
                                     <div class="box_general">
                                         <div class="form-group">
-                                            <input type="text" name="first_last_name" class="required form-control" placeholder="First and Last name">
+                                            <label for="gender">Ton genre</label>
+                                            <select name="gender" id="gender">
+                                                <option value="miss">Madame</option>
+                                                <option value="sir">Monsieur</option>
+                                                <option value="other">Autre</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" class="required form-control" placeholder="Your Email">
+                                            <label for="lastname">Ton NOM</label>
+                                            <input type="text" name="lastname" id="lastname" class="required form-control" placeholder="Ton NOM">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="telephone" class="form-control" placeholder="Your Telephone">
+                                            <label for="firstname">Ton Prénom</label>
+                                            <input type="text" name="firstname" id="firstname" class="required form-control" placeholder="Ton Prénom">
                                         </div>
-                                        <div class="form-group add_bottom_30">
-                                            <div class="styled-select">
-                                                <select class="required" name="country">
-                                                    <option value="" selected>Select your country</option>
-                                                    <option value="Europe">Europe</option>
-                                                    <option value="Asia">Asia</option>
-                                                    <option value="North America">North America</option>
-                                                    <option value="South America">South America</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="email">Ton E-mail</label>
+                                            <input type="email" name="email" id="email" class="required form-control" placeholder="Ton E-mail">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthdate">Ta date de naissance</label>
+                                            <input type="date" name="birthdate" id="birthdate" class="required form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Ton mot de passe</label>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Ton mot de passe">
                                         </div>
                                         <div class="checkbox_questions">
-                                            <input name="terms" type="checkbox" class="icheck required" value="yes">
+                                            <input name="terms" type="checkbox" class="required" value="yes">
                                             <label>Please accept <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
                                         </div>
                                     </div>
@@ -122,7 +130,7 @@
                         <div class="float-right clearfix">
                             <button type="button" name="backward" class="backward">Précédent </button>
                             <button type="button" name="forward" class="forward">Suivant</button>
-                            <button type="submit" name="process" class="submit">Valider</button>
+                            <button type="submit" name="process" class="submit">Submit</button>
                         </div>
                     </div>
                     <!-- /bottom-wizard -->
@@ -135,6 +143,26 @@
         <!-- /Container -->
     </main>
     <!-- /main -->
+
+    <!-- Modal terms -->
+    <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsLabel">Terms and conditions</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal terms -->
 {% endblock %}
 {% block configurator_js %}
     <!-- COMMON SCRIPTS -->
@@ -142,4 +170,10 @@
     <script src="{{ asset('js/common_scripts.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/wizard_func_1.js') }}"></script>
+    <script>
+        $(function () {
+            "use strict";
+            $('form#wrapped').attr('action', '{{ path('configurator') }}');
+        })
+    </script>
 {% endblock %}
