@@ -1,0 +1,25 @@
+
+<div class="glide_patch">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+            {% for patch in patches %}
+                <li class="glide__slide item">
+                    <input data-price="1499.00" data-label="MacBook Pro Air" id="answer_{{ patch.id }}_group_3" type="radio" name="answer_group_3" value="MacBook Pro Air $1499.00" class="required">
+                    <label for="answer_{{ patch.id }}_group_3">
+                        <img src="{{ patch.image }}" alt="" class="img-fluid" height="300">
+                        <i class="ribbon">
+                            <span>Popular</span>
+                        </i>
+                        <span class="item_price">$1499.00</span>
+                        <strong>MacBook Pro Air {{ patch.id }}/{{ patches|length }}</strong>
+                        Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+    </div>
+</div>

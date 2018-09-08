@@ -11,6 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class EcommerceController extends AbstractController
 {
     /**
+     * @Route(path="/", name="index")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function index()
+    {
+        return $this->render('ecommerce/index.html.twig');
+    }
+
+    /**
      * @Route("/configurator", name="configurator")
      */
     public function configurator()
@@ -19,7 +28,7 @@ class EcommerceController extends AbstractController
         $colors = $this->getDoctrine()->getRepository(CapColor::class)->findAll();
         $patches = $this->getDoctrine()->getRepository(CapPatch::class)->findAll();
         return $this->render(
-            'ecommerce/index.html.twig',
+            'ecommerce/configurator.html.twig',
             [
                 'types' => $types,
                 'colors' => $colors,

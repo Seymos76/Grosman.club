@@ -132,7 +132,7 @@ class CapColor
      * @return string
      */
     public function random_color() {
-        $color = $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
+        $color = "#".$this->random_color_part() . $this->random_color_part() . $this->random_color_part();
         return $color;
     }
 

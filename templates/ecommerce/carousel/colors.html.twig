@@ -1,0 +1,22 @@
+
+<div class="glide_color">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+            {% for color in colors %}
+                <li class="glide__slide item">
+                    <input data-price="1499.00" data-label="MacBook Pro Air" id="answer_{{ color.id }}_group_2" type="radio" name="answer_group_2" value="MacBook Pro Air $1499.00" class="required">
+                    <label for="answer_{{ color.id }}_group_2">
+                        <span class="color_item" style="background-color: {{ color.hexa }}"></span>
+                        <span class="item_price">$1499.00</span>
+                        <strong>MacBook Pro Air {{ color.id }}/{{ colors|length }}</strong>
+                        Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+    </div>
+</div>

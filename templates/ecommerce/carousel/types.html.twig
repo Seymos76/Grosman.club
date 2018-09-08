@@ -1,0 +1,25 @@
+
+<div class="glide_type">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+            {% for type in types %}
+                <li class="glide__slide item">
+                    <input data-price="1499.00" data-label="MacBook Pro Air" id="answer_{{ type.id }}_group_1" type="radio" name="answer_group_1" value="MacBook Pro Air $1499.00" class="required">
+                    <label for="answer_{{ type.id }}_group_1">
+                        <img src="{{ asset('images/casquette.png') }}" alt="" class="img-fluid" height="300">
+                        <i class="ribbon">
+                            <span>Popular</span>
+                        </i>
+                        <span class="item_price">$1499.00</span>
+                        <strong>MacBook Pro Air {{ type.id }}/{{ types|length }}</strong>
+                        Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+    </div>
+</div>

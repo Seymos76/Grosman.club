@@ -4,12 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block configurator_css %}{% endblock %}
         {% block stylesheets %}{% endblock %}
+        {% block configurator_css %}{% endblock %}
     </head>
     <body>
     {% if app.session.flashbag %}
-        {{ dump(app.session.flashbag) }}
         {% for flashMessage in app.session.flashbag.get('error') %}
             {{ flashMessage }}
         {% endfor %}
