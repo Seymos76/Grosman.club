@@ -26,15 +26,12 @@ class CapFixtures extends Fixture implements DependentFixtureInterface
             $cap = new Cap();
             $cap->setDateCreation(new \DateTime('now'));
             $cap->setName("Cap$i");
-            /** @var Vat $vat */
-            $vat = $this->getReference('vat');
             /** @var CapPatch $patch */
             $patch = $this->getReference('patch'.rand(1,10));
             /** @var CapColor $color */
             $color = $this->getReference('color'.rand(1,10));
             /** @var CapType $type */
             $type = $this->getReference('type'.rand(1,5));
-            $cap->setVat($vat);
             $cap->setColor($color);
             $cap->setPatch($patch);
             $cap->setType($type);
@@ -47,7 +44,6 @@ class CapFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return array(
-            VatFixtures::class,
             CapColorFixtures::class,
             CapTypeFixtures::class,
             CapPatchFixtures::class

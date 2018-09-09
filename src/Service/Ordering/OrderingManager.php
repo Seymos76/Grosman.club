@@ -9,7 +9,9 @@
 namespace App\Service\Ordering;
 
 
+use App\Entity\Cap;
 use App\Entity\Ordering;
+use App\Entity\User;
 use App\Service\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -29,14 +31,43 @@ class OrderingManager extends EntityManager
         $y = $datetime->format('Y');
         $m = $datetime->format('m');
         $d = $datetime->format('d');
-        $uniq = uniqid();
-        $number = $y.$m.$d.$uniq;
+        $nb = rand(50,500);
+        $number = $y.$m.$d.$nb;
         return $number;
     }
 
-    public function createOrdering()
+    /**
+     * @param Cap $cap
+     * @param User $user
+     * @return Ordering
+     */
+    public function createOrdering(Cap $cap, User $user)
     {
         $ordering = new Ordering();
         $ordering->setNumber(self::setOrderingNumber());
+        $ordering->setCap($cap);
+        $ordering->setUser($user);
+        $this->update($ordering);
+        return $ordering;
+    }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function getOrderingsByUser(User $user)
+    {
+        $orderings = $this->manager->getRepository(Ordering::class)->findBy(
+            array(
+                'user' => $user
+            )
+        );
+        return $orderings;
+    }
+
+    public function getAll()
+    {
+        $orderings = $this->manager->getRepository(Ordering::class)->findAll();
+        return $orderings;
     }
 }

@@ -23,6 +23,7 @@ class CapColorFixtures extends Fixture
             $color->setSlug("couleur$i");
             $color->setHexa();
             $color->setRgba();
+            $color->setPricing(rand(5,10));
             $this->addReference("color$i", $color);
             $manager->persist($color);
         }

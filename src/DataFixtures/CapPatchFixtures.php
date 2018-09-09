@@ -24,6 +24,7 @@ class CapPatchFixtures extends Fixture
             $patch->setDateCreation(new \DateTime('now'));
             $patch->setDescription("Ma description");
             $patch->setStock(rand(0,50));
+            $patch->setPricing(rand(5,10));
             $patch->setImage("https://img.chapeaushop.fr/Casquette-Classic-Patch-Snapback-by-Vans-bleu-fonce.46616_rf192.jpg");
             $this->addReference("patch$i", $patch);
             $manager->persist($patch);

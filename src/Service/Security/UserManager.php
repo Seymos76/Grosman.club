@@ -60,4 +60,18 @@ class UserManager
             return true;
         }
     }
+
+    /**
+     * @param string $email
+     * @return User|null|object
+     */
+    public function getCurrentUser(string $email)
+    {
+        $user = $this->manager->getManager()->getRepository(User::class)->findOneBy(
+            array(
+                'email' => $email
+            )
+        );
+        return $user;
+    }
 }

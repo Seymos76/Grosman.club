@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ordering
 {
+    const VAT = 0.2;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -22,7 +23,7 @@ class Ordering
     protected $date_creation;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=50)
      */
     protected $number;
 
@@ -37,11 +38,6 @@ class Ordering
     protected $total_ht;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Vat", inversedBy="orderings")
-     */
-    protected $vat;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     protected $total_vat;
@@ -52,7 +48,7 @@ class Ordering
     protected $total_ttc;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orderings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orderings", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     protected $user;
@@ -130,18 +126,6 @@ class Ordering
     public function setTotalHt(?float $total_ht): self
     {
         $this->total_ht = $total_ht;
-
-        return $this;
-    }
-
-    public function getVat(): ?Vat
-    {
-        return $this->vat;
-    }
-
-    public function setVat(?Vat $vat): self
-    {
-        $this->vat = $vat;
 
         return $this;
     }

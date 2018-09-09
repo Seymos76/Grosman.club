@@ -21,12 +21,12 @@ class CapPatchManager extends EntityManager
     }
 
     /**
-     * @param string $name
+     * @param int $id
      * @return CapPatch
      */
-    public function getCapPatch(string $name)
+    public function getCapPatch(int $id)
     {
-        $patch = $this->manager->getRepository(CapPatch::class)->findByName($name);
+        $patch = $this->manager->getRepository(CapPatch::class)->find($id);
         return $patch;
     }
 }

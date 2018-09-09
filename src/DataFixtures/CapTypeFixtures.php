@@ -22,6 +22,7 @@ class CapTypeFixtures extends Fixture
             $cap_type->setName("Forme $i");
             $cap_type->setSlug("forme_$i");
             $cap_type->setDateCreation(new \DateTime('now'));
+            $cap_type->setPricing(rand(5,10));
             $cap_type->setImage("https://cdn.pixabay.com/photo/2017/07/21/14/28/hat-2525910_960_720.png");
             $this->addReference("type$i", $cap_type);
             $manager->persist($cap_type);

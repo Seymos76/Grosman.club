@@ -28,17 +28,21 @@ class CapManager extends EntityManager
     }
 
     /**
-     * @param string $answer_type
-     * @param string $answer_color
-     * @param string $answer_patch
+     * @param int $answer_type
+     * @param int $answer_color
+     * @param int $answer_patch
      * @return Cap
      */
-    public function createCap(string $answer_type, string $answer_color, string $answer_patch)
+    public function createCap(int $answer_type, int $answer_color, int $answer_patch)
     {
         $cap = new Cap();
-        $cap->setType($this->typeManager->getType($answer_type));
-        $cap->setColor($this->colorManager->getCapColor($answer_color));
-        $cap->setPatch($this->patchManager->getCapPatch($answer_patch));
+        $type = $this->typeManager->getType($answer_type);
+        $cap->setType($type);
+        $color = $this->colorManager->getCapColor($answer_color);
+        $cap->setColor($color);
+        $patch = $this->patchManager->getCapPatch($answer_patch);
+        $cap->setPatch($patch);
+        $cap->setPricing((floatval($type->getPricing()) + floatval($color->getPricing()) + floatval($patch->getPricing())));
         $this->update($cap);
         return $cap;
     }

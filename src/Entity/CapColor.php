@@ -44,6 +44,11 @@ class CapColor
      */
     private $caps;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pricing;
+
     public function __construct()
     {
         $this->caps = new ArrayCollection();
@@ -145,6 +150,18 @@ class CapColor
                 $cap->setColor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPricing(): ?float
+    {
+        return $this->pricing;
+    }
+
+    public function setPricing(float $pricing): self
+    {
+        $this->pricing = $pricing;
 
         return $this;
     }

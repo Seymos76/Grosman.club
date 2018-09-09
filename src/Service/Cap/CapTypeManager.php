@@ -21,12 +21,12 @@ class CapTypeManager extends EntityManager
     }
 
     /**
-     * @param string $name
+     * @param int $id
      * @return CapType
      */
-    public function getType(string $name)
+    public function getType(int $id)
     {
-        $type = $this->manager->getRepository(CapType::class)->findByName($name);
+        $type = $this->manager->getRepository(CapType::class)->find($id);
         return $type;
     }
 }

@@ -59,6 +59,11 @@ class CapPatch
      */
     private $caps;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pricing;
+
     public function __construct()
     {
         $this->caps = new ArrayCollection();
@@ -180,6 +185,18 @@ class CapPatch
                 $cap->setPatch(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPricing(): ?float
+    {
+        return $this->pricing;
+    }
+
+    public function setPricing(float $pricing): self
+    {
+        $this->pricing = $pricing;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use App\Entity\CapType;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Service\Cap\CapManager;
+use App\Service\Ordering\OrderingManager;
 use App\Service\Security\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,7 @@ class EcommerceController extends AbstractController
     /**
      * @Route("/configurator", name="configurator")
      */
-    public function configurator(Request $request, UserManager $userManager, CapManager $capManager)
+    public function configurator(Request $request, UserManager $userManager, CapManager $capManager, OrderingManager $orderingManager)
     {
         $types = $this->getDoctrine()->getRepository(CapType::class)->findAll();
         $colors = $this->getDoctrine()->getRepository(CapColor::class)->findAll();
@@ -45,11 +46,13 @@ class EcommerceController extends AbstractController
             if (!$birthdate instanceof \DateTime) {
                 throw new \UnexpectedValueException("Could not parse the date : $birthdate");
             }
-            $user = $userManager->register($gender, $lastname, $firstname, $email, $password, $birthdate);
             $cap = $capManager->createCap($answer_type, $answer_color, $answer_patch);
-            dump($user);
-            dump($cap);
-            die;
+            $user = $userManager->register($gender, $lastname, $firstname, $email, $password, $birthdate);
+            // envoi email de confirmation pour activation du compte client
+            $orderingManager->createOrdering($cap, $user);
+            // envoi email avec commande
+            $this->addFlash('success',"Votre commande a été créée, vous pouvez la retrouver dans votre espace client.");
+            return $this->redirectToRoute('login');
         }
         return $this->render(
             'ecommerce/configurator.html.twig',

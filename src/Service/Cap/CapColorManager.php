@@ -21,12 +21,12 @@ class CapColorManager extends EntityManager
     }
 
     /**
-     * @param string $name
+     * @param int $id
      * @return CapColor
      */
-    public function getCapColor(string $name)
+    public function getCapColor(int $id)
     {
-        $color = $this->manager->getRepository(CapColor::class)->findByName($name);
+        $color = $this->manager->getRepository(CapColor::class)->find($id);
         return $color;
     }
 }
