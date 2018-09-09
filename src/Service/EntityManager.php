@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping\Entity;
 
 class EntityManager
 {
-    private $manager;
+    protected $manager;
 
     public function __construct(EntityManagerInterface $manager)
     {

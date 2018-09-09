@@ -68,6 +68,19 @@ class Ordering
      */
     protected $invoice;
 
+    public function __construct()
+    {
+        $this->date_creation = new \DateTime('now');
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

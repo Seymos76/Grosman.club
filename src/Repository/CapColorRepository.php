@@ -19,6 +19,15 @@ class CapColorRepository extends ServiceEntityRepository
         parent::__construct($registry, CapColor::class);
     }
 
+    public function findByName(string $name)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return CapColor[] Returns an array of CapColor objects
 //     */

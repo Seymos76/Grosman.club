@@ -19,6 +19,15 @@ class CapTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, CapType::class);
     }
 
+    public function findByName(string $name)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return CapType[] Returns an array of CapType objects
 //     */

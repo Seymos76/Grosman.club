@@ -26,13 +26,26 @@ class UserManager
     }
 
     /**
-     * @param User $user
+     * @param string $gender
+     * @param string $lastname
+     * @param string $firstname
+     * @param string $email
+     * @param string $password
+     * @param \DateTime $birthdate
+     * @return User
      */
-    public function register(User $user)
+    public function register(string $gender, string $lastname, string $firstname, string $email, string $password, \DateTime $birthdate)
     {
-        $password = $this->passwordManager->encodePassword($user, $user->getPassword());
-        $user->setPassword($password);
+        $user = new User();
+        $user->setGender($gender);
+        $user->setLastname($lastname);
+        $user->setFirstname($firstname);
+        $user->setEmail($email);
+        $user->setBirthdate($birthdate);
+        $encoded_password = $this->passwordManager->encodePassword($user, $password);
+        $user->setPassword($encoded_password);
         $this->manager->update($user);
+        return $user;
     }
 
     public function activateUser(string $code)

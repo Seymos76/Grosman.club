@@ -19,6 +19,15 @@ class CapPatchRepository extends ServiceEntityRepository
         parent::__construct($registry, CapPatch::class);
     }
 
+    public function findByName(string $name)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return CapPatch[] Returns an array of CapPatch objects
 //     */

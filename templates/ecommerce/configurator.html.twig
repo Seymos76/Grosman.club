@@ -28,8 +28,8 @@
                                 {% for type in types %}
                                     <div class="col-lg-4">
                                         <div class="item">
-                                            <input data-price="1499.00" data-label="MacBook Pro Air" id="answer_{{ type.id }}_group_1" type="radio" name="answer_group_1" value="MacBook Pro Air $1499.00" class="required">
-                                            <label for="answer_{{ type.id }}_group_1"><img src="{{ type.image }}" alt="" class="img-fluid"><i class="ribbon"><span>Popular</span></i><span class="item_price">$1499.00</span><strong>MacBook Pro Air</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
+                                            <input data-price="1499.00" data-label="{{ type.name }}" id="answer_{{ type.id }}_group_1" type="radio" name="answer_group_1" value="{{ type.name }}" class="required">
+                                            <label for="answer_{{ type.id }}_group_1"><img src="{{ type.image }}" alt="" class="img-fluid"><i class="ribbon"><span>Popular</span></i><span class="item_price">$1499.00</span><strong>{{ type.name }}</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -47,8 +47,8 @@
                                 {% for color in colors %}
                                     <div class="col-lg-4">
                                         <div class="item">
-                                            <input data-price="199.00" data-label="3.2GHz 8-core Intel Xeon" id="answer_{{ color.id }}_group_2" type="radio" name="answer_group_2" value="3.2GHz 8-core Intel Xeon $199.00" class="required">
-                                            <label for="answer_{{ color.id }}_group_2"><div class="color_item" style="background-color: {{ color.hexa }}"></div><span class="item_price">$199.00</span><strong>3.2GHz 8-core Intel Xeon</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
+                                            <input data-price="199.00" data-label="{{ color.name }}" id="answer_{{ color.id }}_group_2" type="radio" name="answer_group_2" value="{{ color.name }}" class="required">
+                                            <label for="answer_{{ color.id }}_group_2"><div class="color_item" style="background-color: {{ color.hexa }}"></div><span class="item_price">$199.00</span><strong>{{ color.name }}</strong></label>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -66,8 +66,8 @@
                                 {% for patch in patches %}
                                     <div class="col-lg-4">
                                         <div class="item">
-                                            <input data-price="99.00" data-label="32GB 2666MHz" id="answer_{{ patch.id }}_group_3" type="radio" name="answer_group_3" value="332GB 2666MHz $99.00" class="required">
-                                            <label for="answer_{{ patch.id }}_group_3"><img src="{{ patch.image }}" alt="" class="img-fluid"><span class="item_price">$99.00</span><strong>32GB 2666MHz</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>
+                                            <input data-price="99.00" data-label="{{ patch.name }}" id="answer_{{ patch.id }}_group_3" type="radio" name="answer_group_3" value="{{ patch.name }}" class="required">
+                                            <label for="answer_{{ patch.id }}_group_3"><img src="{{ patch.image }}" alt="" class="img-fluid"><span class="item_price">$99.00</span><strong>{{ patch.name }}</strong></label>
                                         </div>
                                     </div>
                                 {% endfor %}

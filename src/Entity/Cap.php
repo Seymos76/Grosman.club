@@ -52,18 +52,13 @@ class Cap
     private $pricing;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Vat", inversedBy="caps")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $vat;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ordering", mappedBy="cap")
      */
     private $orderings;
 
     public function __construct()
     {
+        $this->date_creation = new \DateTime('now');
         $this->orderings = new ArrayCollection();
     }
 
@@ -140,18 +135,6 @@ class Cap
     public function setPricing(?float $pricing): self
     {
         $this->pricing = $pricing;
-
-        return $this;
-    }
-
-    public function getVat(): ?Vat
-    {
-        return $this->vat;
-    }
-
-    public function setVat(?Vat $vat): self
-    {
-        $this->vat = $vat;
 
         return $this;
     }

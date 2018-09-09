@@ -29,18 +29,12 @@ class Vat
     private $value;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cap", mappedBy="vat")
-     */
-    private $caps;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ordering", mappedBy="vat")
      */
     private $orderings;
 
     public function __construct()
     {
-        $this->caps = new ArrayCollection();
         $this->orderings = new ArrayCollection();
     }
 
@@ -69,37 +63,6 @@ class Vat
     public function setValue(float $value): self
     {
         $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Cap[]
-     */
-    public function getCaps(): Collection
-    {
-        return $this->caps;
-    }
-
-    public function addCap(Cap $cap): self
-    {
-        if (!$this->caps->contains($cap)) {
-            $this->caps[] = $cap;
-            $cap->setVat($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCap(Cap $cap): self
-    {
-        if ($this->caps->contains($cap)) {
-            $this->caps->removeElement($cap);
-            // set the owning side to null (unless already changed)
-            if ($cap->getVat() === $this) {
-                $cap->setVat(null);
-            }
-        }
 
         return $this;
     }
